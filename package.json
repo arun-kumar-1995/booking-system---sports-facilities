@@ -1,0 +1,27 @@
+{
+  "name": "booking-system-for-sports-facilities",
+  "version": "1.0.0",
+  "description": "booking system for sports facilities",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "keywords": [
+    "booking syatem",
+    "sports faculties",
+    "redis",
+    "websocket"
+  ],
+  "author": "arun kumar",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "mongoose": "^8.6.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
