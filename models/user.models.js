@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 const schema = new mongoose.Schema(
   {
     first_name: {
@@ -15,6 +16,12 @@ const schema = new mongoose.Schema(
     phone: {
       type: Number,
       required: true,
+      select: false,
+    },
+    password: {
+      type: String,
+      trim: true,
+      select: false,
     },
     role: {
       type: String,
@@ -35,7 +42,18 @@ const schema = new mongoose.Schema(
 
 const User = mongoose.model("User", schema);
 
-// define user methods here
+//define hooks here
+schema.pre("isModified", async function (next) {
+  if (!this.isModified("password")) return next();
+  try {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+  } catch (err) {
+    return next(err);
+  }
+});
 
+// define user methods here
 // define usefull index here
 export default User;
