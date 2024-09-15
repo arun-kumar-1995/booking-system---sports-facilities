@@ -1,5 +1,5 @@
-const httpStatusCode = {
+const httpStatus = {
 
 }
 
-export default httpStatusCode;
+export default httpStatus;
