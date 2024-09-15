@@ -1,5 +1,3 @@
-import sendResponse from "../utils/responseHandler";
-
 const errorMiddleware = (err, req, res, next) => {
   let statusCode = err.statusCode || 500;
   let errorMessage = err.message || "Internal Server Error";
@@ -22,7 +20,11 @@ const errorMiddleware = (err, req, res, next) => {
   }
 
   // return the json response
-  return sendResponse(res, statusCode, errorMessage);
+  return res.status(statusCode).json({
+    success: false,
+    message: errorMessage,
+    status: statusCode,
+  });
 };
 
 export default errorMiddleware;
