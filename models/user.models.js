@@ -25,6 +25,10 @@ const schema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Booking",
     },
+    account_status: {
+      type: String,
+      enum: ["active", "blocked"],
+    },
   },
   { timestamps: true }
 );
