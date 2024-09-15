@@ -55,5 +55,8 @@ schema.pre("isModified", async function (next) {
 });
 
 // define user methods here
+schema.methods.matchPassword = function (enteredPassword) {
+  return bcrypt.compare(enteredPassword, this.password);
+};
 // define usefull index here
 export default User;
