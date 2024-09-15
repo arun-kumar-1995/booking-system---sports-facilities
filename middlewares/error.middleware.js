@@ -1,3 +1,5 @@
+import sendResponse from "../utils/responseHandler";
+
 const errorMiddleware = (err, req, res, next) => {
   let statusCode = err.statusCode || 500;
   let errorMessage = err.message || "Internal Server Error";
@@ -10,21 +12,17 @@ const errorMiddleware = (err, req, res, next) => {
   // MongoDB connection errors
   if (err.name === "MongoNetworkError") {
     statusCode = 503;
-    message = "Unable to connect to the database. Please try again later.";
+    errorMessage = "Unable to connect to the database. Please try again later.";
   }
   // duplicate key error
   if (err.code === 11000) {
     statusCode = 400;
     const field = Object.keys(err.keyValue)[0];
-    message = `Duplicate value for ${field}. Please use a different value.`;
+    errorMessage = `Duplicate value for ${field}. Please use a different value.`;
   }
 
   // return the json response
-  return res.status(statusCode).json({
-    success: false,
-    message: errorMessage,
-    status: statusCode,
-  });
+  return sendResponse(res, statusCode, errorMessage);
 };
 
 export default errorMiddleware;
