@@ -5,10 +5,12 @@ const schema = new mongoose.Schema(
     first_name: {
       type: String,
       trim: true,
+      required: true,
     },
     last_name: {
       type: String,
       trim: true,
+      required: true,
     },
     email: {
       type: String,
@@ -36,6 +38,7 @@ const schema = new mongoose.Schema(
     account_status: {
       type: String,
       enum: ["active", "blocked"],
+      default: "active",
     },
   },
   { timestamps: true }

@@ -1,4 +1,6 @@
-import User from "../models/user.models";
+import User from "../models/user.models.js";
+import ErrorHandler from "../utils/errorHandler.js";
+import sendResponse from "../utils/responseHandler.js";
 
 export const signUp = async (req, res, next) => {
   const { email, phone } = req.body;
@@ -6,20 +8,14 @@ export const signUp = async (req, res, next) => {
   try {
     //find user by email or phone number
     const user = await User.findOne({
-      $or: [{ email: req.body.email }, { phone: req.body.email }],
+      $or: [{ email: req.body.email }, { phone: parseInt(req.body.phone) }],
     });
-    if (user)
-      return res.status(200).json({
-        success: true,
-        message: "user already exists",
-      });
+
+    if (user) throw new ErrorHandler(409, "user already exists");
 
     // else create a new user
     await User.create(req.body);
-    return res.status(201).json({
-      success: true,
-      message: "User registered",
-    });
+    sendResponse(res, 201, "User registered");
   } catch (err) {
     next(err);
   }

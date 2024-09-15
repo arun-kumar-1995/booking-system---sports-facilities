@@ -19,6 +19,11 @@ const errorMiddleware = (err, req, res, next) => {
     errorMessage = `Duplicate value for ${field}. Please use a different value.`;
   }
 
+  // validation error
+  if (err.name === "ValidationError") {
+    const fieldNames = Object.values(err.errors).map((err) => err.path);
+    errorMessage = `${fieldNames.join(", ")} is required.`;
+  }
   // return the json response
   return res.status(statusCode).json({
     success: false,
