@@ -19,6 +19,10 @@ db.once("open", function () {
   });
 });
 
+// import routes
+import appRoute from "./routes/index.js";
+app.use("/", appRoute);
+
 // page not found error
 app.all("*", (req, res, next) => {
   return res.json({
