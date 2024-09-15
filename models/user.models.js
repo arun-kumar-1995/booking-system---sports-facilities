@@ -12,6 +12,7 @@ const schema = new mongoose.Schema(
     },
     email: {
       type: String,
+      select: false,
     },
     phone: {
       type: Number,
