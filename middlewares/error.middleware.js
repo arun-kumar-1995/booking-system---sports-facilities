@@ -6,7 +6,7 @@ const errorMiddleware = (err, req, res, next) => {
   if (err instanceof ReferenceError) {
     statusCode = 400;
   }
-  
+
   // MongoDB connection errors
   if (err.name === "MongoNetworkError") {
     statusCode = 503;
@@ -23,6 +23,7 @@ const errorMiddleware = (err, req, res, next) => {
   return res.status(statusCode).json({
     success: false,
     message: errorMessage,
+    status: statusCode,
   });
 };
 
