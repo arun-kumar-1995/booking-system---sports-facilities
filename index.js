@@ -25,7 +25,7 @@ app.use("/", appRoute);
 
 // page not found error
 app.all("*", (req, res, next) => {
-  return res.json({
+  return res.status(200).json({
     success: false,
     message: "Opps! , We unable to get the page you are looking for",
   });
