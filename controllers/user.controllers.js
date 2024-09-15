@@ -3,8 +3,6 @@ import ErrorHandler from "../utils/errorHandler.js";
 import sendResponse from "../utils/responseHandler.js";
 
 export const signUp = async (req, res, next) => {
-  const { email, phone } = req.body;
-  console.log(email, phone);
   try {
     //find user by email or phone number
     const user = await User.findOne({
