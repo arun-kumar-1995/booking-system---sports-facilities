@@ -1,4 +1,4 @@
-// import User from "../models/user.models";
+import User from "../models/user.models";
 
 export const signUp = async (req, res, next) => {
   const { email, phone } = req.body;
