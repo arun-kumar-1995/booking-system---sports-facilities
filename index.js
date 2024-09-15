@@ -19,5 +19,13 @@ db.once("open", function () {
   });
 });
 
+// page not found error
+app.all("*", (req, res, next) => {
+  return res.json({
+    success: false,
+    message: "Opps! , We unable to get the page you are looking for",
+  });
+});
+
 // global error middleware
 app.use(errorMiddleware);
