@@ -1,5 +1,6 @@
 import app from "./app.js";
 import db from "./config/db.config.js";
+import errorMiddleware from "./middlewares/error.middleware.js";
 
 const { PORT: port = 8000 } = process.env;
 
@@ -17,3 +18,6 @@ db.once("open", function () {
     console.log(`Server is running on http://localhost:${port}`);
   });
 });
+
+// global error middleware
+app.use(errorMiddleware);
