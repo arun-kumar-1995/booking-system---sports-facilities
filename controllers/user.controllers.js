@@ -38,3 +38,10 @@ export const signIn = CatchAsyncError(async (req, res, next) => {
   // send response
   sendResponse(res, 200, "You are logged in", { token });
 });
+
+
+// get user profile
+
+// update user profile
+// get user details (admin only)
+// DELETE /api/users/ (admin only)
