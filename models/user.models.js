@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
+
 const schema = new mongoose.Schema(
   {
     first_name: {
@@ -44,23 +45,27 @@ const schema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const User = mongoose.model("User", schema);
-
-//define hooks here
-schema.pre("isModified", async function (next) {
+// Pre-save hook to hash password
+schema.pre("save", async function (next) {
+  // Check if the password field has been modified
   if (!this.isModified("password")) return next();
+
   try {
+    // Hash the password
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
-    next();
+    next(); // Proceed with the save
   } catch (err) {
     return next(err);
   }
 });
 
-// define user methods here
-schema.methods.matchPassword = function (enteredPassword) {
-  return bcrypt.compare(enteredPassword, this.password);
+// Method to compare hashed passwords
+schema.methods.matchPassword = async function (userPassword) {
+  return await bcrypt.compare(userPassword, this.password);
 };
-// define usefull index here
+
+// Define the User model
+const User = mongoose.model("User", schema);
+
 export default User;

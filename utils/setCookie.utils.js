@@ -1,7 +1,4 @@
-import getSignInToken from "./getSignInToken.js";
-
-const setCookie = (res, user) => {
-  const token = getSignInToken(user._id);
+const setCookie = (res, user, token) => {
   // calculate expires in milliseconds
   const expiresIn = Date.now() + process.env.COOKIE_EXPIRE * 86400000;
 
@@ -12,14 +9,7 @@ const setCookie = (res, user) => {
   };
 
   // setting up cookie
-  res.cookie(
-    "_session",
-    JSON.stringify({
-      token,
-      user: { id: user._id, role: user.role },
-    }),
-    cookie_options
-  );
+  res.cookie("_session", { token }, cookie_options);
 };
 
 export default setCookie;
