@@ -4,6 +4,7 @@ const schema = new mongoose.Schema(
     name: {
       type: String,
       trim: true,
+      required: true,
     },
     location: {
       type: String,
@@ -24,19 +25,16 @@ const schema = new mongoose.Schema(
       {
         date: {
           type: Date,
-          required: true,
         },
 
         timeSlots: [
           {
             startTime: {
               type: Date,
-              required: true,
-            }, // Time in HH:mm format
+            },
             endTime: {
               type: Date,
-              required: true,
-            }, // Time in HH:mm format
+            },
             isAvailable: {
               type: Boolean,
               default: true,
@@ -48,7 +46,6 @@ const schema = new mongoose.Schema(
     pricing: {
       regularPrice: {
         type: Number,
-        required: true,
         min: 0,
       },
       peakPrice: {
@@ -82,5 +79,5 @@ const schema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Facility = mongoose.model("Faculty", schema);
+const Facility = mongoose.model("Facility", schema);
 export default Facility;
