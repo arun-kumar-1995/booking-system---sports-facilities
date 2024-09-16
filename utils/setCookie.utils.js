@@ -9,7 +9,7 @@ const setCookie = (res, user, token) => {
   };
 
   // setting up cookie
-  res.cookie("_session", { token }, cookie_options);
+  res.cookie("token", token, cookie_options);
 };
 
 export default setCookie;

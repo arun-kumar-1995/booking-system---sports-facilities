@@ -82,5 +82,5 @@ const schema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Faculty = mongoose.model("Faculty", schema);
-export default Faculty;
+const Facility = mongoose.model("Faculty", schema);
+export default Facility;
