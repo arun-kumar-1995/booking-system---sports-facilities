@@ -5,11 +5,13 @@ import isAuthenticated from "../middlewares/auth.middleware.js";
 // import contsoller
 import {
   createFacilate,
-  addFacilateInfo,
+  addAvailability,
+  addPeakHours,
 } from "../controllers/facilate.controller.js";
 
 // define facilate related routes
 router.route("/create-facilate").post(isAuthenticated, createFacilate);
-// router.route("/add-facilate-info").post(isAuthenticated, addFacilateInfo);
+router.route("/add-availability").post(isAuthenticated, addAvailability);
+router.route("/add-peak-hours").post(isAuthenticated, addPeakHours);
 
 export default router;

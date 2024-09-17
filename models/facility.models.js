@@ -55,8 +55,8 @@ const schema = new mongoose.Schema(
     },
     peakHours: [
       {
-        startTime: { type: String },
-        endTime: { type: String },
+        startTime: { type: Date },
+        endTime: { type: Date },
       },
     ],
     capacity: {
