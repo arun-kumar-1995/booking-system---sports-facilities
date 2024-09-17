@@ -140,3 +140,25 @@ export const addAvailability = CatchAsyncError(async (req, res, next) => {
 
   return sendResponse(res, 200, "Availability date added");
 }, true);
+
+export const getFacilate = CatchAsyncError(async (req, res, next) => {
+  let { type, name, page , perPage } = req.query;
+
+  let query = {};
+
+  if (type) query.type = type;
+  if (name) query.name = name;
+  page = parseInt(page) || 1;
+  perPage = parseInt(perPage) || 10;
+
+  const skip = (page - 1) * perPage;
+  const limit = perPage;
+
+  const facilates = await Facility.find(query)
+    .sort({ _id: -1 })
+    // .limit()
+    // .skip(skip)
+    .lean();
+
+  return sendResponse(res, 200, "Here is facilities", { facilates });
+});
